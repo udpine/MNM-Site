@@ -101,7 +101,7 @@ export default function Home() {
       <section className="relative py-20 lg:py-32 vintage-pattern">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left space-y-8">
+            <div className="text-center space-y-8">
               <div className="space-y-4">
                 <h1 className="text-5xl md:text-7xl font-black text-primary leading-tight" data-testid="hero-title">
                   MEET THE<br />
@@ -112,7 +112,7 @@ export default function Home() {
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4 items-center lg:items-start">
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                 <Button 
                   asChild
                   className="vintage-button px-8 py-4 font-bold text-lg text-primary hover:bg-accent bg-background"
@@ -133,9 +133,19 @@ export default function Home() {
                     Join Community
                   </a>
                 </Button>
+                <Button 
+                  asChild
+                  className="vintage-button px-8 py-4 font-bold text-lg text-primary hover:bg-accent bg-background"
+                  data-testid="button-follow-twitter"
+                >
+                  <a href="https://x.com/LittleManSUI" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-twitter mr-2"></i>
+                    Follow Us
+                  </a>
+                </Button>
               </div>
 
-              <div className="flex items-center justify-center lg:justify-start space-x-6 pt-4">
+              <div className="flex items-center justify-center space-x-6 pt-4">
                 <div className="text-center">
                   <div className="text-2xl font-black text-primary" data-testid="ticker-display">$MNM</div>
                   <div className="text-sm text-muted-foreground font-medium">TICKER</div>
@@ -328,6 +338,15 @@ export default function Home() {
                 data-testid="footer-telegram-link"
               >
                 <i className="fab fa-telegram text-primary text-xl"></i>
+              </a>
+              <a 
+                href="https://x.com/LittleManSUI"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                data-testid="footer-twitter-link"
+              >
+                <i className="fab fa-twitter text-primary text-xl"></i>
               </a>
               <a 
                 href={blastUrl}

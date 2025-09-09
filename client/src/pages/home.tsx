@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import PriceChart from "@/components/PriceChart";
 import vintageCharacterImage from "@assets/Superhéroe de dibujo animado vintage_1757378062974.png";
 
 export default function Home() {
@@ -188,6 +189,11 @@ export default function Home() {
             <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto" data-testid="token-info-subtitle">
               Everything you need to know about the Little Man token on SUI blockchain
             </p>
+          </div>
+
+          {/* Price Chart - Full Width */}
+          <div className="mb-12">
+            <PriceChart />
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

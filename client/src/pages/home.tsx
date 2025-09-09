@@ -1,9 +1,21 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import PriceChart from "@/components/PriceChart";
 import vintageCharacterImage from "@assets/Superhéroe de dibujo animado vintage_1757378062974.png";
+
+interface PriceData {
+  price: number | null;
+  change24h: number | null;
+  volume24h: number | null;
+  marketCap: number | null;
+  lastUpdated: string;
+  error?: string;
+  message?: string;
+  contractAddress?: string;
+}
 
 export default function Home() {
   const { toast } = useToast();
@@ -12,6 +24,14 @@ export default function Home() {
   const contractAddress = "0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b";
   const telegramUrl = "https://t.me/mmmmmnmmms";
   const blastUrl = "https://blast.fun/token/0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b::mnm::MNM";
+
+  // Check if price data is available to determine if chart should be shown
+  const { data: priceData } = useQuery<PriceData>({
+    queryKey: ["/api/price/current"],
+    refetchInterval: 30000, // Check every 30 seconds
+  });
+
+  const hasPriceData = priceData && priceData.price !== null;
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -191,10 +211,12 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Price Chart - Full Width */}
-          <div className="mb-12">
-            <PriceChart />
-          </div>
+          {/* Price Chart - Full Width (only show if price data is available) */}
+          {hasPriceData && (
+            <div className="mb-12">
+              <PriceChart />
+            </div>
+          )}
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Contract Address Card */}

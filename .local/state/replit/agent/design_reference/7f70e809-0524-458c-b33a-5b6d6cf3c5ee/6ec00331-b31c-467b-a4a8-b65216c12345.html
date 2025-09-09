@@ -1,0 +1,424 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Man | $MNM Token</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    border: "var(--border)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["Inter", "system-ui", "sans-serif"],
+                    display: ["Inter", "system-ui", "sans-serif"],
+                },
+                animation: {
+                    'bounce-slow': 'bounce 3s infinite',
+                    'pulse-slow': 'pulse 4s infinite',
+                }
+            },
+        }
+    };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --background: hsl(45 15% 96%);
+            --foreground: hsl(0 0% 10%);
+            --card: hsl(45 20% 98%);
+            --card-foreground: hsl(0 0% 15%);
+            --primary: hsl(0 0% 10%);
+            --primary-foreground: hsl(45 15% 96%);
+            --secondary: hsl(35 25% 85%);
+            --secondary-foreground: hsl(0 0% 20%);
+            --muted: hsl(35 20% 90%);
+            --muted-foreground: hsl(0 0% 45%);
+            --accent: hsl(40 30% 75%);
+            --accent-foreground: hsl(0 0% 10%);
+            --border: hsl(35 15% 85%);
+            --ring: hsl(0 0% 20%);
+            --radius: 12px;
+        }
+
+        .vintage-border {
+            border: 4px solid var(--primary);
+            border-radius: var(--radius);
+        }
+
+        .cartoon-shadow {
+            box-shadow: 8px 8px 0px var(--primary);
+        }
+
+        .vintage-button {
+            background: var(--background);
+            border: 3px solid var(--primary);
+            border-radius: var(--radius);
+            transition: all 0.2s ease;
+        }
+
+        .vintage-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--primary);
+        }
+
+        .rubber-hose {
+            border-radius: 50px;
+        }
+
+        .copy-success {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        .vintage-pattern {
+            background-image: radial-gradient(circle at 2px 2px, var(--muted) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground font-sans antialiased">
+    <!-- @COMPONENT: Header -->
+    <header class="relative bg-background border-b-4 border-primary">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center vintage-border">
+                        <span class="text-primary-foreground font-black text-xl">M</span>
+                    </div>
+                    <span class="font-black text-2xl text-primary">LITTLE MAN</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#about" class="font-semibold text-muted-foreground hover:text-primary transition-colors">About</a>
+                    <a href="#tokenomics" class="font-semibold text-muted-foreground hover:text-primary transition-colors">Tokenomics</a>
+                    <a href="#community" class="font-semibold text-muted-foreground hover:text-primary transition-colors">Community</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: Hero Section -->
+    <section class="relative py-20 lg:py-32 vintage-pattern">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left space-y-8">
+                    <div class="space-y-4">
+                        <h1 class="text-5xl md:text-7xl font-black text-primary leading-tight">
+                            MEET THE<br>
+                            <span class="inline-block transform -rotate-2">LITTLE MAN</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-muted-foreground font-medium max-w-lg">
+                            The vintage superhero bringing classic cartoon charm to the SUI blockchain
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 items-center lg:items-start">
+                        <button class="vintage-button px-8 py-4 font-bold text-lg text-primary hover:bg-accent transition-all">
+                            <i class="fas fa-rocket mr-2"></i>
+                            Get $MNM
+                        </button>
+                        <button class="vintage-button px-8 py-4 font-bold text-lg text-primary hover:bg-accent transition-all">
+                            <i class="fab fa-telegram mr-2"></i>
+                            Join Community
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-center lg:justify-start space-x-6 pt-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-black text-primary">$MNM</div>
+                            <div class="text-sm text-muted-foreground font-medium">TICKER</div>
+                        </div>
+                        <div class="w-px h-12 bg-border"></div>
+                        <div class="text-center">
+                            <div class="text-2xl font-black text-primary">SUI</div>
+                            <div class="text-sm text-muted-foreground font-medium">BLOCKCHAIN</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <!-- Vintage cartoon character from uploaded image -->
+                        <div class="w-80 h-80 md:w-96 md:h-96 vintage-border cartoon-shadow bg-card flex items-center justify-center animate-bounce-slow">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjVGMUU4Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjOEI3MzU1Ij5WaW50YWdlIENoYXJhY3RlcjwvdGV4dD4KPHR0ZXh0IHg9IjE1MCIgeT0iMTcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjOEI3MzU1Ij5JbWFnZSBQbGFjZWhvbGRlcjwvdGV4dD4KPC9zdmc+" 
+                                 alt="Little Man - Vintage Cartoon Superhero" 
+                                 class="w-full h-full object-contain rounded-lg" 
+                                 data-mock-image="true" 
+                                 data-implementation="Replace with actual vintage cartoon character image from upload" />
+                        </div>
+                        <!-- Decorative elements -->
+                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-accent rounded-full vintage-border animate-pulse-slow"></div>
+                        <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-secondary rounded-full vintage-border"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- @COMPONENT: Token Info Section -->
+    <section id="about" class="py-20 bg-card">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-primary mb-4">TOKEN INFORMATION</h2>
+                <p class="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
+                    Everything you need to know about the Little Man token on SUI blockchain
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Contract Address Card -->
+                <div class="vintage-border cartoon-shadow bg-background p-8 space-y-4">
+                    <div class="text-center">
+                        <i class="fas fa-address-card text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-black text-primary mb-2">CONTRACT ADDRESS</h3>
+                        <p class="text-sm text-muted-foreground font-medium mb-4">SUI Blockchain</p>
+                        <div class="bg-muted p-4 rounded-lg border-2 border-border">
+                            <p class="text-xs font-mono break-all text-foreground" data-bind="contractAddress">
+                                0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b
+                            </p>
+                        </div>
+                        <button class="vintage-button w-full mt-4 py-3 font-bold text-primary hover:bg-accent" 
+                                onclick="copyToClipboard('0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b', this)">
+                            <i class="fas fa-copy mr-2"></i>
+                            Copy Address
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ticker Info Card -->
+                <div class="vintage-border cartoon-shadow bg-background p-8 space-y-4">
+                    <div class="text-center">
+                        <i class="fas fa-dollar-sign text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-black text-primary mb-2">TICKER SYMBOL</h3>
+                        <p class="text-sm text-muted-foreground font-medium mb-4">Official Token Symbol</p>
+                        <div class="bg-primary text-primary-foreground rounded-full w-32 h-32 mx-auto flex items-center justify-center mb-4">
+                            <span class="text-4xl font-black" data-bind="ticker">$MNM</span>
+                        </div>
+                        <p class="text-lg font-bold text-primary">Little Man Token</p>
+                    </div>
+                </div>
+
+                <!-- Blast.fun Link Card -->
+                <div class="vintage-border cartoon-shadow bg-background p-8 space-y-4 md:col-span-2 lg:col-span-1">
+                    <div class="text-center">
+                        <i class="fas fa-external-link-alt text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-black text-primary mb-2">TRADE ON BLAST</h3>
+                        <p class="text-sm text-muted-foreground font-medium mb-4">Buy & Sell $MNM</p>
+                        <a href="https://blast.fun/token/0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b::mnm::MNM" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="vintage-button w-full inline-block py-4 font-bold text-primary hover:bg-accent text-center transition-all">
+                            <i class="fas fa-rocket mr-2"></i>
+                            Trade Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Token Info Section -->
+
+    <!-- @COMPONENT: Community Section -->
+    <section id="community" class="py-20 vintage-pattern">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-primary mb-4">JOIN THE COMMUNITY</h2>
+                <p class="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
+                    Connect with fellow Little Man enthusiasts and stay updated on the latest news
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Telegram Card -->
+                    <div class="vintage-border cartoon-shadow bg-card p-12 text-center space-y-6">
+                        <div class="w-24 h-24 bg-primary rounded-full mx-auto flex items-center justify-center">
+                            <i class="fab fa-telegram text-4xl text-primary-foreground"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-primary mb-2">TELEGRAM</h3>
+                            <p class="text-lg text-muted-foreground font-medium mb-6">
+                                Join our active community for real-time updates and discussions
+                            </p>
+                            <a href="https://t.me/mmmmmnmmms" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="vintage-button inline-block px-8 py-4 font-bold text-lg text-primary hover:bg-accent transition-all">
+                                <i class="fab fa-telegram mr-2"></i>
+                                Join Channel
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Community Stats Card -->
+                    <div class="vintage-border cartoon-shadow bg-card p-12 text-center space-y-6">
+                        <div class="w-24 h-24 bg-accent rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-users text-4xl text-accent-foreground"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-primary mb-2">COMMUNITY</h3>
+                            <p class="text-lg text-muted-foreground font-medium mb-6">
+                                Growing strong with vintage cartoon enthusiasts worldwide
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-muted-foreground">Network:</span>
+                                    <span class="font-black text-primary">SUI Blockchain</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-muted-foreground">Style:</span>
+                                    <span class="font-black text-primary">1930s Cartoon</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-muted-foreground">Character:</span>
+                                    <span class="font-black text-primary">Little Man</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Community Section -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-primary text-primary-foreground py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center space-y-6">
+                <div class="flex items-center justify-center space-x-3">
+                    <div class="w-16 h-16 bg-primary-foreground rounded-full flex items-center justify-center">
+                        <span class="text-primary font-black text-2xl">M</span>
+                    </div>
+                    <span class="font-black text-3xl">LITTLE MAN</span>
+                </div>
+                
+                <p class="text-lg font-medium max-w-2xl mx-auto opacity-90">
+                    Bringing vintage cartoon charm to the modern cryptocurrency world on SUI blockchain
+                </p>
+
+                <div class="flex justify-center space-x-6">
+                    <a href="https://t.me/mmmmmnmmms" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <i class="fab fa-telegram text-primary text-xl"></i>
+                    </a>
+                    <a href="https://blast.fun/token/0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b::mnm::MNM" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <i class="fas fa-external-link-alt text-primary text-xl"></i>
+                    </a>
+                </div>
+
+                <div class="border-t border-primary-foreground/20 pt-6 mt-8">
+                    <p class="text-sm opacity-70 font-medium">
+                        © 2024 Little Man Token. All rights reserved. | 
+                        <span class="font-bold">$MNM</span> on SUI Blockchain
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // Copy to clipboard functionality
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(function() {
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                button.classList.add('copy-success');
+                
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copy-success');
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some vintage character animation on scroll
+        (function() {
+            const characterElement = document.querySelector('.animate-bounce-slow');
+            let isScrolling = false;
+
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    characterElement.style.transform = 'translateY(-10px) rotate(2deg)';
+                    isScrolling = true;
+                    
+                    setTimeout(function() {
+                        characterElement.style.transform = 'translateY(0) rotate(0deg)';
+                        isScrolling = false;
+                    }, 300);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Man | $MNM Token</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    border: "var(--border)",
+                    ring: "var(--ring)",
+                }
+            }
+        }
+    };
+    </script>
+    <style>
+        :root {
+            --background: hsl(35 30% 96%);
+            --foreground: hsl(25 15% 15%);
+            --card: hsl(35 25% 94%);
+            --card-foreground: hsl(25 15% 15%);
+            --primary: hsl(25 15% 15%);
+            --primary-foreground: hsl(35 30% 96%);
+            --secondary: hsl(30 15% 75%);
+            --secondary-foreground: hsl(25 15% 15%);
+            --muted: hsl(30 20% 85%);
+            --muted-foreground: hsl(25 10% 40%);
+            --accent: hsl(40 35% 85%);
+            --accent-foreground: hsl(25 15% 15%);
+            --border: hsl(25 15% 75%);
+            --ring: hsl(25 15% 15%);
+            --radius: 24px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Fredoka', cursive;
+            background: var(--background);
+            color: var(--foreground);
+        }
+
+        .cartoon-border {
+            border: 4px solid var(--primary);
+            border-radius: var(--radius);
+        }
+
+        .speech-bubble {
+            position: relative;
+            background: var(--card);
+            border: 4px solid var(--primary);
+            border-radius: 30px;
+            padding: 2rem;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: var(--primary);
+            border-bottom: 0;
+            margin-left: -15px;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+            border-top-color: var(--card);
+            border-bottom: 0;
+            margin-left: -12px;
+        }
+
+        .vintage-btn {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .vintage-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .mascot-container {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .wiggle {
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        .copy-btn {
+            background: var(--accent);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .token-address {
+            font-family: 'Courier New', monospace;
+            background: var(--muted);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            word-break: break-all;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- @COMPONENT: Header -->
+    <header class="text-center py-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-6xl md:text-8xl font-bold text-primary mb-4 wiggle">
+                LITTLE MAN
+            </h1>
+            <div class="text-2xl md:text-3xl font-semibold text-muted-foreground mb-2">
+                💰 $MNM TOKEN 💰
+            </div>
+            <p class="text-lg text-muted-foreground">
+                The vintage superhero of the SUI blockchain!
+            </p>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: Hero Section -->
+    <section class="py-12 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <!-- Character Display -->
+            <div class="text-center">
+                <div class="mascot-container floating">
+                    <!-- Vintage cartoon superhero character inspired by the uploaded image -->
+                    <div class="cartoon-border bg-card p-8">
+                        <div class="text-8xl mb-4">🦸‍♂️</div>
+                        <h2 class="text-3xl font-bold text-primary mb-2">Meet Little Man!</h2>
+                        <p class="text-lg text-muted-foreground">
+                            Your friendly neighborhood crypto superhero
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Token Information -->
+            <div class="space-y-6">
+                <div class="speech-bubble">
+                    <h3 class="text-2xl font-bold text-primary mb-4">🪙 Token Details</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-muted-foreground mb-1">Ticker</label>
+                            <div class="text-3xl font-bold text-primary">$MNM</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-muted-foreground mb-1">Blockchain</label>
+                            <div class="text-xl font-semibold text-accent-foreground">SUI Network</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- @COMPONENT: Contract Information -->
+    <section class="py-12 px-4 bg-card">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center text-primary mb-8">📋 Contract Information</h2>
+            
+            <div class="cartoon-border bg-background p-6 mb-8">
+                <h3 class="text-xl font-bold text-primary mb-4">SUI Token Address</h3>
+                <div class="flex flex-col sm:flex-row gap-4 items-start">
+                    <div class="token-address flex-1" data-mock="true">
+                        0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b
+                    </div>
+                    <button class="copy-btn" data-event="click:copyAddress" data-implementation="Copy address to clipboard">
+                        📋 Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: Quick Actions -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="cartoon-border bg-accent p-6 text-center">
+                    <h3 class="text-xl font-bold text-primary mb-4">💬 Join Community</h3>
+                    <p class="text-muted-foreground mb-4">
+                        Connect with fellow Little Man enthusiasts!
+                    </p>
+                    <a href="https://t.me/mmmmmnmmms" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="vintage-btn">
+                        📱 Telegram
+                    </a>
+                </div>
+
+                <div class="cartoon-border bg-accent p-6 text-center">
+                    <h3 class="text-xl font-bold text-primary mb-4">🚀 Trade Token</h3>
+                    <p class="text-muted-foreground mb-4">
+                        Get your $MNM tokens on Blast.fun
+                    </p>
+                    <a href="https://blast.fun/token/0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b::mnm::MNM" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="vintage-btn">
+                        💥 Blast.fun
+                    </a>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Quick Actions -->
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Contract Information -->
+
+    <!-- @COMPONENT: Features Section -->
+    <section class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center text-primary mb-12">⭐ Why Little Man?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="cartoon-border bg-card p-6 mb-4 floating" style="animation-delay: 0s;">
+                        <div class="text-4xl mb-3">🎭</div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Vintage Charm</h3>
+                        <p class="text-muted-foreground">
+                            Bringing 1930s cartoon magic to the blockchain
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="cartoon-border bg-card p-6 mb-4 floating" style="animation-delay: 0.5s;">
+                        <div class="text-4xl mb-3">⚡</div>
+                        <h3 class="text-xl font-bold text-primary mb-2">SUI Power</h3>
+                        <p class="text-muted-foreground">
+                            Built on the fast and efficient SUI network
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="cartoon-border bg-card p-6 mb-4 floating" style="animation-delay: 1s;">
+                        <div class="text-4xl mb-3">👥</div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Community</h3>
+                        <p class="text-muted-foreground">
+                            Join a fun and engaging crypto community
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Features Section -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="py-8 px-4 bg-primary text-primary-foreground">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="text-2xl font-bold mb-4">🦸‍♂️ Little Man | $MNM</div>
+            <p class="text-lg mb-4">
+                The vintage superhero protecting your crypto adventures!
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://t.me/mmmmmnmmms" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="hover:text-accent transition-colors">
+                    📱 Telegram
+                </a>
+                <span class="text-secondary">|</span>
+                <a href="https://blast.fun/token/0xefde5ddb743bd93e68a75e410e985980457b5e8837c7f4afa36ecc12bb91022b::mnm::MNM" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="hover:text-accent transition-colors">
+                    💥 Blast.fun
+                </a>
+            </div>
+            <div class="mt-6 pt-4 border-t border-secondary text-sm text-secondary">
+                <p>© 2024 Little Man Token. Built with vintage superhero spirit! 🎭</p>
+                <p class="mt-2 text-xs">Always DYOR (Do Your Own Research) before investing in crypto.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        (function() {
+            // Copy address functionality
+            const copyBtn = document.querySelector('.copy-btn');
+            const addressElement = document.querySelector('.token-address');
+            
+            if (copyBtn && addressElement) {
+                copyBtn.addEventListener('click', function() {
+                    const address = addressElement.textContent.trim();
+                    
+                    // TODO: Implement clipboard copy functionality
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(address).then(function() {
+                            copyBtn.textContent = '✅ Copied!';
+                            setTimeout(function() {
+                                copyBtn.textContent = '📋 Copy';
+                            }, 2000);
+                        }).catch(function() {
+                            // Fallback for older browsers
+                            fallbackCopy(address);
+                        });
+                    } else {
+                        fallbackCopy(address);
+                    }
+                });
+            }
+
+            function fallbackCopy(text) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    copyBtn.textContent = '✅ Copied!';
+                    setTimeout(function() {
+                        copyBtn.textContent = '📋 Copy';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                }
+                
+                document.body.removeChild(textArea);
+            }
+
+            // Add some vintage charm with slight randomization to floating animations
+            const floatingElements = document.querySelectorAll('.floating');
+            floatingElements.forEach(function(element, index) {
+                const randomDelay = Math.random() * 2;
+                element.style.animationDelay = randomDelay + 's';
+            });
+        })();
+    </script>
+</body>
+</html>

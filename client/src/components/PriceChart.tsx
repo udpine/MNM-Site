@@ -6,17 +6,28 @@ import { Button } from "@/components/ui/button";
 import { queryClient } from "@/lib/queryClient";
 
 interface PriceData {
-  price: number;
-  change24h: number;
-  volume24h: number;
-  marketCap: number;
+  price: number | null;
+  change24h: number | null;
+  volume24h: number | null;
+  marketCap: number | null;
   lastUpdated: string;
+  error?: string;
+  message?: string;
+  source?: string;
+  contractAddress?: string;
 }
 
 interface HistoryData {
   timestamp: string;
   price: number;
   volume: number;
+}
+
+interface HistoryResponse {
+  error?: string;
+  message?: string;
+  contractAddress?: string;
+  data?: HistoryData[];
 }
 
 const timeRanges = [
@@ -35,7 +46,7 @@ export default function PriceChart() {
   });
 
   // Fetch historical price data
-  const { data: priceHistory, isLoading: isHistoryLoading } = useQuery<HistoryData[]>({
+  const { data: priceHistoryResponse, isLoading: isHistoryLoading } = useQuery<HistoryResponse | HistoryData[]>({
     queryKey: ["/api/price/history", selectedRange],
     queryFn: async () => {
       const response = await fetch(`/api/price/history?days=${selectedRange}`);
@@ -44,6 +55,19 @@ export default function PriceChart() {
     },
     refetchInterval: 60000, // Refetch every minute
   });
+
+  // Handle different response formats
+  const priceHistory = Array.isArray(priceHistoryResponse) 
+    ? priceHistoryResponse 
+    : priceHistoryResponse?.data || [];
+  
+  const historyError = !Array.isArray(priceHistoryResponse) 
+    ? priceHistoryResponse?.error 
+    : null;
+  
+  const historyMessage = !Array.isArray(priceHistoryResponse) 
+    ? priceHistoryResponse?.message 
+    : null;
 
   // Format chart data
   const chartData = priceHistory?.map(item => ({
@@ -71,7 +95,7 @@ export default function PriceChart() {
     return null;
   };
 
-  const isPositiveChange = (currentPrice?.change24h || 0) >= 0;
+  const isPositiveChange = (currentPrice?.change24h ?? 0) >= 0;
 
   return (
     <Card className="vintage-border cartoon-shadow bg-background p-6 space-y-6">
@@ -86,13 +110,13 @@ export default function PriceChart() {
           </div>
           <div className="text-right">
             <div className="text-3xl font-black text-primary" data-testid="current-price">
-              {isPriceLoading ? "..." : `$${currentPrice?.price.toFixed(6) || "0.000000"}`}
+              {isPriceLoading ? "..." : currentPrice?.price ? `$${currentPrice.price.toFixed(6)}` : "Not Listed"}
             </div>
             <div 
               className={`text-sm font-bold ${isPositiveChange ? 'text-green-600' : 'text-red-600'}`}
               data-testid="price-change"
             >
-              {isPriceLoading ? "..." : `${isPositiveChange ? '+' : ''}${currentPrice?.change24h.toFixed(2) || "0.00"}%`}
+              {isPriceLoading ? "..." : currentPrice?.change24h !== null && currentPrice?.change24h !== undefined ? `${isPositiveChange ? '+' : ''}${currentPrice.change24h.toFixed(2)}%` : "N/A"}
             </div>
           </div>
         </div>
@@ -121,6 +145,23 @@ export default function PriceChart() {
             <div className="flex items-center justify-center h-full">
               <div className="text-muted-foreground font-medium" data-testid="chart-loading">
                 Loading chart data...
+              </div>
+            </div>
+          ) : historyError || chartData.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full space-y-4">
+              <div className="text-center">
+                <i className="fas fa-chart-line text-4xl text-muted-foreground mb-3"></i>
+                <div className="text-lg font-bold text-primary mb-2" data-testid="chart-error-title">
+                  {historyError || "Chart Data Not Available"}
+                </div>
+                <div className="text-sm text-muted-foreground font-medium max-w-sm" data-testid="chart-error-message">
+                  {historyMessage || "This token is not yet listed on price tracking services. Chart data will appear once indexed by exchanges."}
+                </div>
+                {currentPrice?.contractAddress && (
+                  <div className="mt-3 text-xs text-muted-foreground">
+                    Contract: {currentPrice.contractAddress.slice(0, 8)}...{currentPrice.contractAddress.slice(-8)}
+                  </div>
+                )}
               </div>
             </div>
           ) : (
@@ -157,17 +198,32 @@ export default function PriceChart() {
         <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border">
           <div className="text-center">
             <div className="text-lg font-black text-primary" data-testid="volume-24h">
-              {isPriceLoading ? "..." : `$${(currentPrice?.volume24h || 0).toLocaleString()}`}
+              {isPriceLoading ? "..." : currentPrice?.volume24h ? `$${currentPrice.volume24h.toLocaleString()}` : "N/A"}
             </div>
             <div className="text-xs text-muted-foreground font-medium">24H VOLUME</div>
           </div>
           <div className="text-center">
             <div className="text-lg font-black text-primary" data-testid="market-cap">
-              {isPriceLoading ? "..." : `$${(currentPrice?.marketCap || 0).toLocaleString()}`}
+              {isPriceLoading ? "..." : currentPrice?.marketCap ? `$${currentPrice.marketCap.toLocaleString()}` : "N/A"}
             </div>
             <div className="text-xs text-muted-foreground font-medium">MARKET CAP</div>
           </div>
         </div>
+        
+        {/* Token Status Message */}
+        {currentPrice?.error && currentPrice?.message && (
+          <div className="mt-4 p-4 bg-muted rounded-lg border border-border">
+            <div className="text-center">
+              <div className="text-sm font-bold text-primary mb-1">Token Status</div>
+              <div className="text-xs text-muted-foreground">{currentPrice.message}</div>
+              {currentPrice.source && (
+                <div className="text-xs text-muted-foreground mt-2">
+                  Checking: {currentPrice.source}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </Card>
   );
